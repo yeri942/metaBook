@@ -1,0 +1,94 @@
+body,
+div,
+ul,
+li,
+dl,
+ol,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+fieldset,
+legend,
+p,
+select,
+table,
+th,
+td,
+tr,
+textarea,
+button,
+form,
+figure,
+figcaption {
+    margin: 0;
+    padding: 0;
+}
+
+/* 링크 초기화 */
+a {
+    text-decoration: none;
+}
+a:hover {
+    color: #bf1e66;
+}
+
+/* 폰트 초기화*/
+body,
+input,
+textarea,
+select,
+button,
+table {
+    font-family: "Noto Sans KR";
+    line-height: 1.5;
+}
+
+/* 폰트 스타일 초기화 */
+em,
+address {
+    font-style: normal;
+}
+
+/* 블릿기호 초기화 */
+ul,
+li,
+ol {
+    list-style: none;
+}
+
+/* 반응형 이미지 */
+img,
+video {
+    width: 100%;
+}
+
+header nav ul li {
+    list-style: none;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #36393f;
+}
+
+/* 기본 버튼 */
+button {
+    color: #fff;
+    width: 200px;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    background-color: #b087bb;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #217fa7;
+}
