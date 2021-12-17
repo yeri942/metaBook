@@ -1,0 +1,116 @@
+html {
+    font-size: 20px;
+}
+body {
+    font-size: 1rem;
+}
+
+body,
+div,
+ul,
+li,
+dl,
+ol,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+fieldset,
+legend,
+p,
+select,
+table,
+th,
+td,
+tr,
+textarea,
+button,
+form,
+figure,
+figcaption {
+    margin: 0;
+    padding: 0;
+}
+
+/* 링크 초기화 */
+a {
+    /* color: #222; */
+    text-decoration: none;
+}
+
+/* 폰트 초기화*/
+body,
+input,
+textarea,
+select,
+button,
+table {
+    font-family: "Noto Sans KR";
+    line-height: 1.5;
+}
+
+/* 폰트 스타일 초기화 */
+em,
+address {
+    font-style: normal;
+}
+
+/* 블릿기호 초기화 */
+ul,
+li,
+ol {
+    list-style: none;
+}
+
+/* 반응형 이미지 */
+img,
+video {
+    width: 100%;
+}
+/*---------------default------------  */
+
+#header {
+    display: flex;
+    padding: 0 1rem;
+    justify-content: space-between;
+    background-color: #2f3036;
+}
+
+#header h1 {
+    height: 100%;
+    line-height: 100%;
+}
+
+#header h1 a {
+    display: inline-block;
+    width: 12rem;
+    height: 2.5rem;
+    background: url(../img/logo_horizon.png) center no-repeat;
+    background-size: contain;
+}
+
+#header .default-menu ul {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center; /*밑으로 붙이길 원한다면 flex-end*/
+}
+
+#header .default-menu ul li a {
+    display: block;
+    width: 3.5rem;
+    height: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.8rem;
+    font-size: 0.9rem;
+    color: #fff;
+    transition: color 0.3s;
+}
+
+#header .default-menu ul li a:hover {
+    color: #2db0e6;
+}
