@@ -90,6 +90,12 @@ a {
     perspective: 1000px;
     transform-style: preserve-3d;
 }
+
+.login-form .button,
+.tab {
+    cursor: pointer;
+}
+
 .login-form .group {
     margin-bottom: 15px;
 }
@@ -158,6 +164,10 @@ a {
 .login-form .group .check:checked + label .icon:after {
     transform: scale(1) rotate(-45deg);
 }
+.login-form .inputDiv {
+    position: relative;
+}
+
 .login-html
     .sign-in:checked
     + .tab
