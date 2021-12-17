@@ -119,7 +119,7 @@ a {
 }
 .login-form .group .label {
     color: #aaa;
-    font-size: 12px;
+    font-size: 15px;
 }
 .login-form .group .button {
     background: #1161ee;
@@ -164,9 +164,23 @@ a {
 .login-form .group .check:checked + label .icon:after {
     transform: scale(1) rotate(-45deg);
 }
+
+.login-form .group .button {
+    font: 600 16px/18px "Open Sans", sans-serif;
+}
+
 .login-form .inputDiv {
     position: relative;
 }
+.login-form .inputDiv img {
+    position: absolute;
+    right: 30px;
+    top: 16px;
+    width: 5%;
+    cursor: pointer;
+}
+/* style="margin-left: 20%; display:inline;
+                vertical-align: middlel; width: 5%; height: 6%;" */
 
 .login-html
     .sign-in:checked
