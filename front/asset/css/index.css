@@ -1,0 +1,29 @@
+#category li {
+    margin: 2%;
+    font-size: 24px;
+    text-align: center;
+    color: white;
+}
+
+#main .topPosts {
+    display: flex;
+    justify-content: center;
+    background-color: khaki;
+    width: 100%;
+    white-space: nowrap;
+}
+#main .topPosts article {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+#main .topPosts article img {
+    object-fit: cover;
+    height: 240px;
+}
+
+.topPosts article span.title,
+.topPosts article span.writer {
+    display: block;
+    text-align: left;
+}
