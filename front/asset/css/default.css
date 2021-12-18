@@ -121,10 +121,14 @@ video {
 /* footer css */
 .site-footer {
     background-color: #2f3036;
-    padding: 45px 0 20px;
+    padding: 0px 0px 20px;
     font-size: 15px;
     line-height: 24px;
     color: #737373;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }
 
 .site-footer .footer-container {
@@ -150,7 +154,7 @@ video {
 .site-footer .social-icons {
     text-align: right;
     width: 100%;
-    padding-right: 100px;
+    padding-right: 0;
 }
 .site-footer .social-icons a {
     width: 40px;
@@ -162,6 +166,7 @@ video {
     background-color: #33353d;
 }
 .copyright-text {
+    padding-top: 20px;
     padding-left: 30px;
 }
 
@@ -174,6 +179,7 @@ video {
 }
 .social-icons li {
     display: inline-block;
+    padding-top: 10px;
 }
 
 .social-icons a {
