@@ -1,10 +1,7 @@
 module.exports = function (app, User) {
     //list
     app.get("/user", (req, res) => {
-        fs.readdir("/user", (err, files) => {
-            if (err) next(err);
-            req.list = files;
-        });
+        req.list();
     });
 
     //create
