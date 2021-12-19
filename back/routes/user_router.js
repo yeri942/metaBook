@@ -1,5 +1,5 @@
 module.exports = function (app, User) {
-    //list
+    //list 아직 구현 못했어요!
     app.get("/user", (req, res) => {
         req.list();
     });
