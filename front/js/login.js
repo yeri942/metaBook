@@ -2,10 +2,10 @@ function passwordToggle(e) {
     let x = e.target.previousElementSibling;
     if (x.type === "password") {
         x.type = "text";
-        e.target.src = "/images/login/eye.png";
+        e.target.src = "../asset/img/login/eye.png";
     } else {
         x.type = "password";
-        e.target.src = "/images/login/eyeslash.png";
+        e.target.src = "../asset/img/login/eyeslash.png";
     }
 }
 
