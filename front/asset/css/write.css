@@ -52,18 +52,16 @@
     position: relative;
 }
 
-#write-main #write-form .form-left #title {
+#write-main #write-form .form-left #post_title {
     height: 5%;
 }
 
-#write-main #write-form .form-left #content {
+#write-main #write-form .form-left #post_content {
     height: 95%;
 }
 
 #write-main #write-form .form-right .filebox {
     height: 60%;
-    /* background-color: transparent; */
-
     position: relative;
 }
 
@@ -76,7 +74,7 @@
     display: block;
     padding: 0.5rem;
     color: #fff;
-    /* background-color: #36393f; */
+    transition: all 0.3s ease;
     border: 2px solid #fff;
     border-radius: 0.3rem;
     box-shadow: none;
@@ -119,7 +117,7 @@
     object-fit: cover;
 }
 
-#write-main #write-form .form-right #link {
+#write-main #write-form .form-right #post_link {
     height: 8%;
 }
 
