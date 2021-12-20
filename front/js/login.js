@@ -82,6 +82,8 @@ document.getElementById("signup-form").addEventListener("submit", async (e) => {
     const password = document.forms["signup"].querySelector(
         '[name = "password"]'
     ).value;
+    const nickname =
+        document.forms["signup"].querySelector('[name="nickname"]').value;
     try {
         await axios.post("/join", { email, password, nickname });
         alert("회원가입 완료");
