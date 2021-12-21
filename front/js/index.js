@@ -44,22 +44,23 @@ const dummy= [
 ]
 
 const target_board_page=document.querySelector("#board_page");
-const target_top_board=document.querySelector(".top");
-const target_board_list=document.querySelector(".board_list");
+const target_top=document.querySelector(".top");
+const target_board_content=document.querySelector(".board_content");
 
 function render(datas){
-    target_board_list.innerHTML='';
-    target_top_board.innerHTML='';
+    target_board_content.innerHTML='';
+    target_top.innerHTML='';
 
     for (let i=0; i<3; i++){
-        const article_top = document.createElement("article"); 
         const alink_top =document.createElement("a");
+        const figure_top=document.createElement("figure");
+        const figcaption_top=document.createElement("figcaption");
         const title_top = document.createElement("span");
         const author_top = document.createElement("span");
         const thumb_top= document.createElement("img");
 
         alink_top.setAttribute('href',"#");
-        article_top.className="topPosts_1st";
+        
         title_top.className="title";
         author_top.className="writer";
 
@@ -67,46 +68,51 @@ function render(datas){
         author_top.innerText=dummy[i].author;
         thumb_top.src=dummy[i].thumbnailUrl;
 
-        alink_top.appendChild(thumb_top);
-        alink_top.appendChild(title_top);
-        alink_top.appendChild(author_top);
-    
+        figure_top.appendChild(thumb_top);
         
+        figcaption_top.appendChild(title_top);
+        figcaption_top.appendChild(author_top);
         
-        target_top_board.appendChild(alink_top);
+        figure_top.appendChild(figcaption_top);
+        alink_top.appendChild(figure_top);
+
+        target_top.appendChild(alink_top);
     }
 
-    const ul = document.createElement("ul");
-    const article = document.createElement('article');
+    const board_ul = document.createElement("ul");
+    const board_article = document.createElement('article');
     
     datas.forEach(data => {
-        const li = document.createElement("li");
-        const alink = document.createElement("a");
-        const title= document.createElement("span");
-        const author= document.createElement("span");
-        const thumb= document.createElement("img");
+        const board_li = document.createElement("li");
+        const board_alink = document.createElement("a");
+        const board_figure= document.createElement("figure");
+        const board_figcaption= document.createElement("figcaption");
+        const board_title= document.createElement("span");
+        const board_author= document.createElement("span");
+        const board_thumb= document.createElement("img");
 
-        alink.setAttribute('href',"#");
-        title.className="title";
-        author.className="writer";
-        thumb.className="topPosts_1st";
+        board_alink.setAttribute('href',"#");
+        board_title.className="title";
+        board_author.className="writer";
+        board_thumb.className="topPosts_1st";
         
-        title.innerText=data.title;
-        author.innerText=data.author;
-        thumb.src=data.thumbnailUrl;
+        board_title.innerText=data.title;
+        board_author.innerText=data.author;
+        board_thumb.src=data.thumbnailUrl;
 
         
-        alink.appendChild(thumb);
-        alink.appendChild(title);
-        alink.appendChild(author);
-        li.appendChild(alink);
-
-        ul.appendChild(li);
+        board_figure.appendChild(board_thumb);
+        
+        board_figcaption.appendChild(board_title);
+        board_figcaption.appendChild(board_author);
+        board_figure.appendChild(board_figcaption);
+        board_alink.appendChild(board_figure);
+        board_li.appendChild(board_alink);
+        board_ul.appendChild(board_li);
     })
 
-    article.appendChild(ul);
-    target_board_list.appendChild(article);
-   
+    target_board_content.appendChild(board_ul);
+
 }
 
 window.addEventListener('DOMContentLoaded',()=>{
