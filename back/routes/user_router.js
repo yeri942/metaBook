@@ -1,11 +1,6 @@
 module.exports = function (app, User) {
-    //list
-    app.get("/user", (req, res) => {
-        req.list();
-    });
-
     //create
-    app.post("/user_info", function (req, res) {
+    app.post("/user", function (req, res) {
         const user = new User(req.body);
         // user.name = req.body.name;
         // user.email = req.body.email;
