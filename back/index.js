@@ -1,22 +1,25 @@
 const express = require("express");
-const app = express();
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const morgan = require("morgan");
 const passport = require("passport");
+const multer = require("multer");
+const fs = require("fs");
 
 // middlewares
 const loginRequired = require("./middlewares/login-required");
 
-require("./passport")();
+const app = express();
 
+require("./passport")();
 require("dotenv").config();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(express.json());
+app.use("/images", express.static(path.join(__dirname, "/uploads")));
 
 app.use(
     session({
@@ -26,9 +29,35 @@ app.use(
     })
 );
 
-app.use(passport.initialize());
 app.use(passport.session());
-app.use("/", require("./router/index"));
+app.use(passport.initialize());
+
+const _storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, "uploads/");
+    },
+    filename: function (req, file, cb) {
+        cb(null, `${Date.now()}_${file.originalname}`);
+    },
+});
+
+const upload = multer({ storage: _storage });
+const path = require("path");
+
+const user_router = require("./routes/user_router");
+const post_router = require("./routes/post_router");
+
+//라우터를 모으자!
+app.use("/user", user_router);
+app.use("/post", post_router);
+
+app.post("/upload", upload.single("userfile"), function (req, res) {
+    try {
+        res.json({ ok: true, thumbnailUrl: req.file.filename });
+    } catch (err) {
+        res.json({ ok: false });
+    }
+});
 
 app.listen(process.env.port, () => {
     console.log("Server is working : PORT - ", process.env.port);
