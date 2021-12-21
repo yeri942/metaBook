@@ -1,26 +1,42 @@
 const express = require("express");
 const app = express();
-const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const port = 3000;
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const morgan = require("morgan");
+const passport = require("passport");
 
-const { User } = require("./models/User");
-const { Post } = require("./models/Post");
-const { Comment } = require("./models/Comment");
+// middlewares
+const loginRequired = require("./middlewares/login-required");
+
+require("./passport")();
 
 require("dotenv").config();
 
-mongoose
-    .connect(process.env.mongdbURL, {
-        useNewUrlParser: true,
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(morgan("dev"));
+app.use(express.json());
+
+app.use(
+    session({
+        secret: "10Team",
+        resave: false,
+        saveUninitialized: true,
     })
-    .then(() => console.log("MongoDB Connected..."))
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use("/", require("./router/index"));
+
+app.listen(process.env.port, () => {
+    console.log("Server is working : PORT - ", process.env.port);
+});
+
+mongoose
+    .connect(process.env.mongodbURL)
+    .then(() => {
+        console.log("MongoDB connected...");
+    })
     .catch((err) => console.log(err));
-
-app.get("/", (req, res) => {
-    res.send("schema 작업");
-});
-
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
-});
