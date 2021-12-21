@@ -6,6 +6,7 @@ const morgan = require("morgan");
 const passport = require("passport");
 const multer = require("multer");
 const fs = require("fs");
+const path = require("path");
 
 // middlewares
 const loginRequired = require("./middlewares/login-required");
@@ -19,7 +20,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(express.json());
-app.use("/images", express.static(path.join(__dirname, "/uploads")));
 
 app.use(
     session({
@@ -42,7 +42,8 @@ const _storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: _storage });
-const path = require("path");
+
+app.use("/images", express.static(path.join(__dirname, "/uploads")));
 
 const user_router = require("./routes/user_router");
 const post_router = require("./routes/post_router");
