@@ -14,6 +14,7 @@ const dummy = {
     metaUrl: "hello",
     thumbnailUrl: "http://localhost:5500/front/asset/img/logo.png",
 };
+
 //------- 수정 화면 렌더 ----------
 window.addEventListener("DOMContentLoaded", () => {
     if (postId) {
@@ -31,6 +32,7 @@ async function getPostContent(postId) {
         $link.value = post.metaUrl;
         thumb_img.src = post.thumbnailUrl;
         thumb_img.classList.add("show");
+        filename.textContent = "";
     } catch (err) {
         alert(err);
     }
