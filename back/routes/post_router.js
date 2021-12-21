@@ -1,68 +1,67 @@
-module.exports = function (app, Post) {
-    //create
-    app.post("/post", function (req, res) {
-        const post = new Post(req.body);
-        post.save(function (err) {
-            if (err) {
-                console.error(err);
-                res.json({ message: "생성 실패" });
-                return;
-            }
-            res.json({ message: "생성 완료!" });
-        });
-    });
+const express = require("express");
+const router = express.Router();
+const Post = require("../models/Post");
 
-    //list
+//create
+router.post("/", async function (req, res) {
+    const post = new Post(req.body);
+    try {
+        const result = await post.save();
+        res.json({ ok: true, message: "생성 완료!" });
+    } catch (err) {
+        res.json({ ok: false, message: "생성 실패" });
+    }
+});
 
-    //search
-    app.get("/post/:title", function (req, res) {
-        Post.find({ title: req.params.title }, function (err, post) {
-            if (post.length == 0)
-                return res.status(404).json({
-                    error: "해당 제목을 가진 글이 존재하지 않습니다.",
-                });
-            if (err) return res.status(500).json({ error: err });
-            res.json(post);
-        });
-    });
+//list
 
-    //update
-    app.put("/post/:id", function (req, res) {
-        Post.findOne({ _id: req.params.id }, function (err, post) {
-            if (!post)
-                return res
-                    .status(404)
-                    .json({ error: "해당 글이 존재하지 않습니다." });
-            if (err)
-                return res.status(500).json({ error: "Database Failure!" });
+//view
 
-            post.author = req.body.author;
-            post.title = req.body.title;
-            post.content = req.body.content;
-            post.metaUrl = req.body.metaUrl;
-            post.metaThumbUrl = req.body.metaThumbUrl;
-            post.likes = req.body.likes;
-            post.comments = req.body.comments;
-
-            post.save(function (err) {
-                if (err)
-                    return res.status(500).json({ error: "Failed to update!" });
-                res.json({ message: "수정이 완료되었습니다!" });
+//search
+router.get("/:title", async function (req, res) {
+    try {
+        const post = await Post.find({ title: req.params.title });
+        if (post.length == 0)
+            return res.status(404).json({
+                error: "해당 제목을 가진 글이 존재하지 않습니다.",
             });
-        });
-    });
+        res.json(post);
+    } catch (err) {
+        res.json({ ok: false, message: "검색 실패" });
+    }
+});
 
-    //delete
-    app.delete("/post_delete/:id", function (req, res) {
-        Post.deleteOne({ _id: req.params.id }, function (err, output) {
-            if (err) {
-                console.log(err);
-            }
-            // return res.status(500).json({ error: "Database Failure!" });
+//update
+router.put("/:postId", async function (req, res) {
+    try {
+        const post = await Post.findOne({ _id: req.params.postId }).populate(
+            "author"
+        );
+        if (!post) {
+            return res.json({ ok: false, message: "수정 실패" });
+        }
+        if (req.body.userId !== post.author._id) {
+            return res.json({ ok: false, message: "수정 실패" });
+        }
+        //$set =>정보가 없는걸 빈칸으로 하지않고 바뀐 내용만 저장하는것!
+        const result = await Post.updateOne(
+            { _id: req.params.postId },
+            { $set: req.body }
+        );
+        res.json({ ok: true, message: "수정 완료" });
+    } catch (err) {
+        res.json({ ok: false, message: "수정 실패" });
+    }
+});
 
-            res.json({ message: "삭제 완료" });
+//delete
+router.delete("/:id", async function (req, res) {
+    try {
+        const post = await Post.deleteOne({ _id: req.params.id });
+        res.json({ ok: true, message: "삭제 완료" });
+    } catch (err) {
+        res.json({ ok: false, message: "삭제 실패" });
+    }
+});
 
-            res.status(204).end();
-        });
-    });
-};
+module.exports = router;

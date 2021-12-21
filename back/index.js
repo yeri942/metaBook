@@ -23,33 +23,23 @@ require("dotenv").config();
 
 app.use(morgan("dev"));
 
-const User = require("./models/User");
-const user_router = require("./routes/user_router")(app, User);
-const Post = require("./models/Post");
-const post_router = require("./routes/post_router")(app, Post);
+const user_router = require("./routes/user_router");
+const post_router = require("./routes/post_router");
 
-app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
+app.use("/images", express.static(path.join(__dirname, "/uploads")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.set("view engine", "pug");
-app.set("views", path.join(__dirname, "html"));
-
-app.get("/", (req, res) => {
-    res.send("<b>Hello World! ❤</b><br>졸리다");
-});
-
-app.get("/upload", function (req, res) {
-    res.render("../uploads/upload.pug");
-});
 app.post("/upload", upload.single("userfile"), function (req, res) {
-    res.render("../uploads/post.pug", {
-        image: "uploads/" + req.file.filename,
-        title: req.body.title,
-        content: "IU's songs are good",
-    });
-    // res.send("Uploaded : " + req.file.filename);
+    try {
+        res.json({ ok: true, thumbnailUrl: req.file.filename });
+    } catch (err) {
+        res.json({ ok: false });
+    }
 });
+//라우터를 모으자!
+app.use("/user", user_router);
+app.use("/post", post_router);
 
 app.listen(port, () => {
     console.log("Server is working : PORT - ", port);
