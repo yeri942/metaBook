@@ -81,22 +81,23 @@ async function requestUploadPost(file, postId) {
         data.append("file", file);
         data.append("name", file.name);
         try {
-            // await axios.post("/", data);
+            const res = await axios.post("/api/upload", data);
+            textData.thumbnailUrl = res.data.thumbnailUrl;
         } catch (err) {
             return alert("사진 업로드 중 오류가 발생했습니다.");
         }
     }
     try {
         console.log(textData);
+        let res;
         if (postId) {
-            const res = await axios.put("/", textData);
+            res = await axios.put("/api/post", textData);
         } else {
-            const res = await axios.post("/", textData);
+            res = await axios.post("/api/post", textData);
         }
-        // if (res.data.ok) {
-        //     window.location.href = "";
-        // }
-        // window.location.href = "http://localhost:5500/front/index.html";
+        if (res.data.ok) {
+            window.location.href = "../index.html";
+        }
     } catch (err) {
         return alert("포스트 업로드 중 오류가 발생했습니다.");
     }
