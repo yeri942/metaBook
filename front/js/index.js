@@ -103,6 +103,18 @@ const dummy= [
     },
 ]
 
+function getPosts(){
+    //전체 posts 요청
+    axios.get('http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com//api/post')
+    .then(response=>{
+
+    })
+    console.log(posts);
+    
+}
+
+
+
 const target_board_page=document.querySelector("#board_page");
 const target_top=document.querySelector(".top");
 const target_board_content=document.querySelector(".board_content");
@@ -184,8 +196,15 @@ function paginate(totaldata,currPage){
     const perPage=20; //4*5
     const pageCount=5; //한 번에 몇개 페이지 까지 보일지
 
+    console.log(`currPage: ${currPage}`);
+    console.log(`totalData: ${totaldata}`);
+
     const totalPage=Math.ceil(totaldata/perPage);
-    const pageGroup=Math.ceil(currPage/limit);
+    const pageGroup=Math.ceil(currPage/pageCount);
+
+    console.log(`pageGroup: ${pageGroup}`);
+    console.log(`totalPage: ${totalPage}`);
+
 
     let last=pageGroup*pageCount; //화면에 보여질 마지막 페이지 번호
     if (last>totalPage) last=totalPage;
@@ -193,16 +212,37 @@ function paginate(totaldata,currPage){
     const next=last+1;
     const prev=first-1;
 
-    if (totalPage<1) first = last;
-    // const pages=$("#pages"); //JQuery.empty() => 태그를 포함한 요소의 내용 삭제.
-    // pages.empty();
-    const target_pages=document.querySelector(".pages");
-    target_pages.innerHTML="";
-    
+    console.log(`last:${last}`);
+    console.log(`first:${first}`);
+    console.log(`next:${next}`);
+    console.log(`prev:${prev}`);
 
+    if (totalPage<1) first = last;
+    const pages=$(".pages"); //JQuery.empty() => 태그를 포함한 요소의 내용 삭제.
+    pages.empty();
+    
     if (first>5){
-        pages.append()
+        pages.append(
+            `<li><a onclick=location.href='#'>prev</a></li>`
+        );
     }
 
-
+    for (let j=first; j<=last; j++){
+        if(currPage===j){ pages.append(`<li class="pageItem"><a onclick=location.href='#'>${j}</a></li>`);
+        }else if (j>0){
+            pages.append(`<li class="pageItem"><a onclick=location.href='#'>${j}</a></li>`);
+        }
+    }
+    if (next>5 && next<totalPage){
+        pages.append(`<li class="pageItem"><a onclick=location.href='#'>다음</a></li>`);
+    }
+   
 }
+
+//첫 랜딩 페이지는 1페이지에 있는 게시물들을 불러온다. 
+//onclick= func(page)를 구현해 보드의 내용을 지우고, 해당 페이지에 맞는 게시물들을 가져와야함.
+
+
+const dummy_num=Object.keys(dummy).length;
+console.log(`dummy 개수: ${dummy_num}`);
+paginate(dummy_num,1);
