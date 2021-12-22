@@ -149,7 +149,7 @@ document.getElementById("signup-form").addEventListener("submit", async (e) => {
                 text: "Welcome to the Metabook",
                 icon: "success",
             });
-            location.href = "/login.html";
+            location.href = "./login.html";
         } catch (err) {
             swal({
                 title: "회원가입 실패",
