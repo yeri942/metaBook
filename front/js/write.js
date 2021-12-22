@@ -11,13 +11,6 @@ const $content = postSubmitForm.querySelector("#post_content");
 const $link = postSubmitForm.querySelector("#post_link");
 const postId = window.location.href.split("?")[1];
 
-// const dummy = {
-//     title: "제목",
-//     content: "내용입니다",
-//     metaUrl: "hello",
-//     thumbnailUrl: "http://localhost:5500/front/asset/img/logo.png",
-// };
-
 //------- 수정 화면 렌더 ----------
 let userId = null;
 window.addEventListener("DOMContentLoaded", async () => {
@@ -90,10 +83,7 @@ async function requestUploadPost(file, postId) {
         data.append("userfile", file);
         data.append("name", file.name);
         try {
-            const res = await axios.post(
-                "http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/upload",
-                data
-            );
+            const res = await axios.post("/api/upload", data);
             textData.thumbnailUrl = res.data.thumbnailUrl;
         } catch (err) {
             return alert("사진 업로드 중 오류가 발생했습니다.");
@@ -105,10 +95,7 @@ async function requestUploadPost(file, postId) {
         if (postId) {
             res = await axios.put(`/api/post/${postId}`, textData);
         } else {
-            res = await axios.post(
-                "http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/post",
-                textData
-            );
+            res = await axios.post("/api/post", textData);
         }
         if (res.data.ok) {
             window.location.href = "../index.html";
