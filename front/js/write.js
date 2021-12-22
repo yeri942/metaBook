@@ -1,3 +1,6 @@
+// ---------------import-------------------
+import { getUserId, generateLogout, preventAction } from "./util.js";
+
 // --------------------nodes---------------------------
 const inputFile = document.querySelector("#upload-file");
 const filename = document.querySelector("#write-form .display_box span");
@@ -16,9 +19,12 @@ const postId = window.location.href.split("?")[1];
 // };
 
 //------- 수정 화면 렌더 ----------
-window.addEventListener("DOMContentLoaded", () => {
+let userId = null;
+window.addEventListener("DOMContentLoaded", async () => {
+    userId = await getUserId();
+    generateLogout(userId);
+    preventAction(userId);
     if (postId) {
-        // console.log(window.location.href.split("?")[1]);
         getPostContent(postId);
     }
 });
