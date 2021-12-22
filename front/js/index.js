@@ -3,43 +3,103 @@ const dummy= [
         id:1,
         title:'title1',
         author:'author1',
-        thumbnailUrl:"https://w.namu.la/s/2f42cc22833cfea53c3fc39d621310c29ecc50950fb1d3b04b4915412f28520901b3abb548676c190f9de32f23bb8ec61f07288b5bb1a64fbf0ba5d4b7e5cc74067b17a821c84af2d2519864296c8b6a"
+        thumbnailUrl:"https://static.wixstatic.com/media/c4a473_cd5a9e152a6b4f63b5082f6d39b84a02~mv2.jpeg/v1/fit/w_633,h_418,al_c,q_80/file.jpeg"
     },
     {
         id:2,
         title:'title2',
         author:'author2',
-        thumbnailUrl:"https://mblogthumb-phinf.pstatic.net/MjAxODAxMTRfMTQz/MDAxNTE1ODkyOTIxODU5.0lXfhPaNo0At47pIDFpcehmwuoxOnulQ8SA2EMEc0r0g.CSsYA0qq0lZdfF-8ilz4AW2-SdG7aqgnjWnLiithc7og.JPEG.tina0071/output_2190928647.jpg?type=w800"
+        thumbnailUrl:"https://lh3.googleusercontent.com/proxy/eRKzsaxTL3V5eGyXu_6OpZGT5tv_styH9UFnbci3xSxP1LQyIiJYi3IpsIRpvO31Kl59r94oxogNVx_zNCc8t8-WKV9pOAO5Q62tqSnSrIUSUT9SLMGNFyttccXYbM15ww0MB2cotBKU46tbR40"
     },
     {
         id:3,
         title:'title3',
         author:'author3',
-        thumbnailUrl:"https://w.namu.la/s/37be476d345fabc4043a303a75c192be440f69780242038067551a2cab2ffeaa412712865a0745e12d985be00f7d3b5d88c014c6b1cebe571ec2f7c1152a51a6a5fc4cf7295e4c0c68982ccc1ce8c87aec955a26169a6beb7460087bd4339b44"
+        thumbnailUrl:"https://i.pinimg.com/736x/33/67/93/3367935eba2fdc86b188e2450bf67f7d.jpg"
     },
     {
         id:4,
         title:'title4',
         author:'author4',
-        thumbnailUrl:"https://img1.daumcdn.net/thumb/C176x176/?fname=https://k.kakaocdn.net/dn/brzH98/btqEZLQAzSQ/HRqKg8BaNkf5jBsCIkTgfK/img.jpg"
+        thumbnailUrl:"https://cdn.gametoc.co.kr/news/photo/202108/62478_202765_4926.jpg"
     },
     {
         id:5,
         title:'title5',
         author:'author5',
-        thumbnailUrl:"https://w.namu.la/s/ba5842c92852abc4b1530459f2495442927ef1da25e397d5b24e389567407cdac348f40f83212ef80817a01174b1bc82b69ca79421524e89c13daff79b38ca3a13a493a5c501e83054c1b7f9699d30582165a2a4625a965b6f4ea1528400027e"
+        thumbnailUrl:"https://jangkunblog.com/assets/img/2021/gather-town-2021.png"
     },
     {
         id:6,
         title:'title6',
         author:'author6',
-        thumbnailUrl:"https://mblogthumb-phinf.pstatic.net/MjAyMDA5MTBfNDcg/MDAxNTk5NjkwOTMyNjQ3.dipaeVUMTAaHe_kwKIyQUbUMmXZq9hhr4bHeiHg70m8g.38270pdrNnaHsxh7CcaMJ6bdxAz8RosHK89Y5d7Nij4g.JPEG.khs20010327/1599690932739.jpeg?type=w800"
+        thumbnailUrl:"https://pbs.twimg.com/media/E0FTI-MWEAUntzL?format=jpg&name=large"
     },
     {
         id:7,
         title:'title7',
         author:'author7',
-        thumbnailUrl:"https://ww.namu.la/s/012301eebf710713b714b89b9fc28b19a289efd7904a4c94d34382936bc3d97fed333713a016967387c5588123e69952d26b520feae087f147fcbf5f3ccb640fdb186717345bfba94f9ea092b5f97f16"
+        thumbnailUrl:"https://i.pinimg.com/550x/c5/aa/30/c5aa30190cb3dd1bf2938e4bfe36366d.jpg"
+    },
+    {
+        id:8,
+        title:'title8',
+        author:'author8',
+        thumbnailUrl:"https://static.wixstatic.com/media/c4a473_cd5a9e152a6b4f63b5082f6d39b84a02~mv2.jpeg/v1/fit/w_633,h_418,al_c,q_80/file.jpeg"
+    },
+    {
+        id:9,
+        title:'title9',
+        author:'author9',
+        thumbnailUrl:"https://lh3.googleusercontent.com/proxy/eRKzsaxTL3V5eGyXu_6OpZGT5tv_styH9UFnbci3xSxP1LQyIiJYi3IpsIRpvO31Kl59r94oxogNVx_zNCc8t8-WKV9pOAO5Q62tqSnSrIUSUT9SLMGNFyttccXYbM15ww0MB2cotBKU46tbR40"
+    },
+    {
+        id:10,
+        title:'title10',
+        author:'author10',
+        thumbnailUrl:"https://i.pinimg.com/550x/c5/aa/30/c5aa30190cb3dd1bf2938e4bfe36366d.jpg"
+    },
+    {
+        id:11,
+        title:'title11',
+        author:'author11',
+        thumbnailUrl:"https://i.pinimg.com/550x/c5/aa/30/c5aa30190cb3dd1bf2938e4bfe36366d.jpg"
+    },
+    {
+        id:12,
+        title:'title12',
+        author:'author12',
+        thumbnailUrl:"https://i.pinimg.com/550x/c5/aa/30/c5aa30190cb3dd1bf2938e4bfe36366d.jpg"
+    },
+    {
+        id:13,
+        title:'title13',
+        author:'author13',
+        thumbnailUrl:"https://i.pinimg.com/550x/c5/aa/30/c5aa30190cb3dd1bf2938e4bfe36366d.jpg"
+    },
+    {
+        id:14,
+        title:'title14',
+        author:'author14',
+        thumbnailUrl:"https://i.pinimg.com/550x/c5/aa/30/c5aa30190cb3dd1bf2938e4bfe36366d.jpg"
+    },
+    {
+        id:15,
+        title:'title15',
+        author:'author15',
+        thumbnailUrl:"https://i.pinimg.com/550x/c5/aa/30/c5aa30190cb3dd1bf2938e4bfe36366d.jpg"
+    },
+    {
+        id:16,
+        title:'title16',
+        author:'author16',
+        thumbnailUrl:"https://i.pinimg.com/550x/c5/aa/30/c5aa30190cb3dd1bf2938e4bfe36366d.jpg"
+    },
+    {
+        id:17,
+        title:'title17',
+        author:'author17',
+        thumbnailUrl:"https://i.pinimg.com/550x/c5/aa/30/c5aa30190cb3dd1bf2938e4bfe36366d.jpg"
     },
 ]
 
@@ -118,3 +178,31 @@ function render(datas){
 window.addEventListener('DOMContentLoaded',()=>{
     render(dummy);
 });
+
+
+function paginate(totaldata,currPage){
+    const perPage=20; //4*5
+    const pageCount=5; //한 번에 몇개 페이지 까지 보일지
+
+    const totalPage=Math.ceil(totaldata/perPage);
+    const pageGroup=Math.ceil(currPage/limit);
+
+    let last=pageGroup*pageCount; //화면에 보여질 마지막 페이지 번호
+    if (last>totalPage) last=totalPage;
+    let first=last-(pageCount-1); //화면에 보여질 첫번째 페이지 번호
+    const next=last+1;
+    const prev=first-1;
+
+    if (totalPage<1) first = last;
+    // const pages=$("#pages"); //JQuery.empty() => 태그를 포함한 요소의 내용 삭제.
+    // pages.empty();
+    const target_pages=document.querySelector(".pages");
+    target_pages.innerHTML="";
+    
+
+    if (first>5){
+        pages.append()
+    }
+
+
+}
