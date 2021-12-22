@@ -47,10 +47,12 @@ app.use("/api/images", express.static(path.join(__dirname, "/uploads")));
 
 const user_router = require("./routes/user_router");
 const post_router = require("./routes/post_router");
+const com_router = require("./routes/com_router");
 
 //라우터를 모으자!
 app.use("/api/user", user_router);
 app.use("/api/post", post_router);
+app.use("/api/com", com_router);
 
 app.post("/upload", upload.single("userfile"), function (req, res) {
     try {
