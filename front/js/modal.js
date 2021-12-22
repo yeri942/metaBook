@@ -1,170 +1,127 @@
-var modalVertCenter = function () {
-    var wH = $(window).height();
-    var mH = $("#popBox .modal-inner").height();
-    var mW = $("#popBox .modal-inner").width();
-    var modalHeight = mH / 2;
-    var windowHeight = wH / 2;
-    var vertCenter = windowHeight - modalHeight;
-    var modalWidth = mW / 2;
+const figure = document.querySelectorAll("figure");
 
-    $("#popBox .modal-inner").css({
-        "margin-top": vertCenter + "px",
-        "margin-left": "-" + modalWidth + "px",
+function heartToggle() {
+    const heart = document.querySelector(".sprite_heart_icon_outline");
+    let heart_boolean = true;
+    heart.addEventListener("click", () => {
+        if (heart_boolean == true) {
+            // 빨간하트
+            heart.style.backgroundPosition = "-26px -261px";
+            heart_boolean = false;
+            // 좋아요 +1
+        } else {
+            // 빈하트
+            heart.style.backgroundPosition = "-52px -261px";
+            heart_boolean = true;
+            // 좋아요 -1
+        }
     });
-};
+}
 
-$(document).ready(function () {
-    (function (global) {
-        "use strict";
+function commentHtml(author) {
+    const comment_text = document.querySelector(".comment_text");
+    const comment = comment_text.value;
+    console.log(comment);
+    return `<div class="comment-detail">
+                    <div class="comment-nickname">${author}</div>
+                    <div class="comment-text">${comment}</div>
+                    <button data-name="comment_delete" class="comment_delete">x</button>
+                </div>`;
+}
 
-        // Storage variable
-        var modal = {};
+function commentPost(author) {
+    const commentUpload = document.querySelector("#commentUpload");
+    const comment_text = document.querySelector(".comment_text");
+    const comment = comment_text.value;
+    commentUpload.addEventListener("click", () => {
+        if (comment_text.value.length > 1) {
+            $(".comment_box").append(commentHtml("은광"));
+        } else {
+            swal({
+                title: "다시 입력해주세요.",
+                text: "최소 2글자 이상 입력해주세요",
+                icon: "warning",
+            });
+        }
+        comment_text.value = "";
+    });
+}
 
-        // Store for currently active element
-        modal.lastActive = undefined;
-        modal.activeElement = undefined;
+function deleteComment() {
+    const deleteBtn = document.querySelector(".comment_delete");
+    const comment = deleteBtn.parentNode;
+    console.log(comment);
+}
 
-        // Polyfill addEventListener for IE8 (only very basic)
-        modal._addEventListener = function (element, event, callback) {
-            if (element.addEventListener) {
-                element.addEventListener(event, callback, false);
-            } else {
-                element.attachEvent("on" + event, callback);
-            }
-        };
+function modalHtml() {
+    return `<div class="modal">
+            <div class="dimmed"></div>
 
-        // Hide overlay when ESC is pressed
-        modal._addEventListener(
-            document,
-            "keyup",
-            function (event) {
-                var hash = window.location.hash.replace("#", "");
+                <article class="contents">
+            <header class="top">
+                <div class="user_container">
+                    <div class="profile_img">
+                        <img src="./asset/img/thumb.jpeg" alt="프로필이미지" />
+                    </div>
+                    <div class="user_name">
+                        <div class="nick_name m_text">MetaBook</div>
+                    </div>
+                    <div class="gather_link">
+                        <button type="submit" class="write-submit">입장하기</button>
+                    </div>
+                    <div class="modal_exit"><button onclick="closeModal()" class="modal_exit_button" type="submit">x</button></div>
+                </div>
+            </header>
 
-                // If hash is not set
-                if (hash === "" || hash === "!") {
-                    return;
-                }
+            <div class="img_section">
+                <div class="trans_inner">
+                    <div><img src="./asset/img/thumb02.jpg" alt="visual01" /></div>
+                </div>
+            </div>
 
-                // If key ESC is pressed
-                if (event.keyCode === 27) {
-                    window.location.hash = "!";
+            <div class="bottom_icons">
+                <div class="left_icons">
+                    <div class="heart_btn">
+                        <div class="sprite_heart_icon_outline" name="39" data-name="heartbeat"></div>
+                    </div>
+                    <div class="sprite_bubble_icon"></div>
+                </div>
+            </div>
+            <div class="likes m_text">
+                좋아요
+                <span id="like-count-39">999</span>
+                개
+            </div>
+            <div class = 'scroll_container' id= 'style-1'>  
+                <h3 class="maintitle">Title</h2>
+                <div class="maintext">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati et ex labore ipsam dolores
+                    autem doloremque consequatur. Aliquid sed, placeat soluta suscipit voluptatem sunt iusto quos
+                    laboriosam, tenetur aperiam atque.
+                </div>
+            </div>
+                <div class = "comment_box">
+                </div>
+            <div class="comment_field" id="add-comment-post37">
+                <input type="text" placeholder="comment" class="comment_text" />
+                <div id="commentUpload" class="upload_btn m_text" data-name="comment">댓글등록</div>
+            </div>
+        </article>
+        </div>`;
+}
 
-                    if (modal.lastActive) {
-                        return false;
-                    }
+function modal() {
+    $("body").append(modalHtml());
+    heartToggle();
+    commentPost("은광");
+    deleteComment();
+}
+function closeModal() {
+    document.querySelector(".modal").remove();
+}
 
-                    // Unfocus
-                    modal.removeFocus();
-                }
-            },
-            false
-        );
-
-        // Convenience function to trigger event
-        modal._dispatchEvent = function (event, modal) {
-            var eventTigger;
-
-            if (!document.createEvent) {
-                return;
-            }
-
-            eventTigger = document.createEvent("Event");
-
-            eventTigger.initEvent(event, true, true);
-            eventTigger.customData = { modal: modal };
-
-            document.dispatchEvent(eventTigger);
-        };
-
-        // When showing overlay, prevent background from scrolling
-        modal.mainHandler = function () {
-            var hash = window.location.hash.replace("#", "");
-            var modalElement = document.getElementById(hash);
-            var htmlClasses = document.documentElement.className;
-            var modalChild;
-            var oldModal;
-
-            // If the hash element exists
-            if (modalElement) {
-                // Get first element in selected element
-                modalChild = modalElement.children[0];
-
-                // When we deal with a modal and body-class `has-overlay` is not set
-                if (modalChild && modalChild.className.match(/modal-inner/)) {
-                    if (!htmlClasses.match(/has-overlay/)) {
-                        // Set an html class to prevent scrolling
-                        document.documentElement.className += " has-overlay";
-                    }
-
-                    // Unmark previous active element
-                    if (modal.activeElement) {
-                        oldModal = modal.activeElement;
-                        oldModal.className = oldModal.className.replace(" is-active", "");
-                    }
-                    // Mark modal as active
-                    modalElement.className += " is-active";
-                    modal.activeElement = modalElement;
-
-                    // Set the focus to the modal
-                    modal.setFocus(hash);
-
-                    // Fire an event
-                    modal._dispatchEvent("cssmodal:show", modal.activeElement);
-                }
-            } else {
-                document.documentElement.className = htmlClasses.replace(" has-overlay", "");
-
-                // If activeElement is already defined, delete it
-                if (modal.activeElement) {
-                    modal.activeElement.className = modal.activeElement.className.replace(" is-active", "");
-
-                    // Fire an event
-                    modal._dispatchEvent("cssmodal:hide", modal.activeElement);
-
-                    // Reset active element
-                    modal.activeElement = null;
-
-                    // Unfocus
-                    modal.removeFocus();
-                }
-            }
-            modalVertCenter();
-        };
-
-        modal._addEventListener(window, "hashchange", modal.mainHandler);
-        modal._addEventListener(window, "load", modal.mainHandler);
-
-        /*
-         * Accessibility
-         */
-
-        // Focus modal
-        modal.setFocus = function () {
-            if (modal.activeElement) {
-                // Set element with last focus
-                modal.lastActive = document.activeElement;
-
-                // New focussing
-                modal.activeElement.focus();
-            }
-        };
-
-        // Unfocus
-        modal.removeFocus = function () {
-            if (modal.lastActive) {
-                modal.lastActive.focus();
-            }
-        };
-
-        // Export CSSModal into global space
-        global.CSSModal = modal;
-    })(window);
-});
-
-$(window).load(function () {
-    $("#popBox .imageTypeFontAwesome").append('<i class="fa fa-times" />');
-});
-
-$(window).resize(function () {
-    modalVertCenter();
-});
+figure.forEach((el) =>
+    el.addEventListener("click", () => {
+        modal();
+    })
+);

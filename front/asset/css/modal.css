@@ -8,7 +8,7 @@
 }
 
 .write-submit:hover {
-    background-color: #56c9fa;
+    background-color: #5df0a6dc;
 }
 
 body {
@@ -39,9 +39,10 @@ body {
     max-width: 614px;
     border: 1px solid rgba(0, 0, 0, 0.09);
     border-radius: 25px;
-    background: #283964e6;
+    /* background: #283964e6; */
+    background: #36393f;
     color: #fff;
-    z-index: 10;
+    z-index: 666;
 }
 
 .contents .top {
@@ -93,12 +94,13 @@ body {
     border: none;
     opacity: 0.3;
     font-size: 25px;
+    color: #fff;
 }
 
 .write-submit {
     border: none;
     border-radius: 0.25rem;
-    background-color: #2db0e6;
+    background-color: #89ecbbab;
     color: #fff;
     /* margin-left: 330px; */
     padding: 0.5rem 1.3rem;
@@ -234,6 +236,10 @@ body {
     padding-left: 10px;
 }
 
+.comment_text {
+    color: white;
+}
+
 .comment-detail {
     padding: 10px 20px 5px 20px;
     border-bottom: 1px solid rgba(246, 246, 246, 0.24);
@@ -252,4 +258,29 @@ body {
 #style-1::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background-color: #555;
+}
+
+.modal {
+    align-items: center;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 777;
+}
+.modal {
+    z-index: 888;
+    position: fixed;
+    display: flex;
+}
+.modal,
+.modal .dimmed {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.modal .dimmed {
+    position: absolute;
+    background: rgba(11, 19, 30, 0.37);
 }

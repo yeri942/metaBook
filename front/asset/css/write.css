@@ -4,14 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-<<<<<<< HEAD
-    height: calc(100vh - 53px - 111px);
-    position: absolute;
-    top: calc(50vh - 100px);
-    left: calc(50vw - 200px);
-=======
     height: calc(100vh - 53px - 76px);
->>>>>>> 299b4b1417cb8943b04cd88089d8735ad5c4d23a
 }
 
 #write-main #write-form {
