@@ -1,5 +1,15 @@
 const figure = document.querySelectorAll("figure");
 
+let { author, _id, content, title, thumbnailUrl, metaUrl } = "";
+
+axios
+    .get(
+        "http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/page/detail/61c3c7c6610ab05c3a87c3fd"
+    )
+    .then((res) => {
+        let { author, _id, content, title, thumbnailUrl, metaUrl } = res.data.post;
+    });
+
 function heartToggle() {
     const heart = document.querySelector(".sprite_heart_icon_outline");
     let heart_boolean = true;
@@ -67,7 +77,7 @@ function modalHtml() {
                         <div class="nick_name m_text">MetaBook</div>
                     </div>
                     <div class="gather_link">
-                        <button type="submit" class="write-submit">입장하기</button>
+                        <button type="submit" class="write-submit"><a href= ${metaUrl}>입장하기</button>
                     </div>
                     <div class="modal_exit"><button onclick="closeModal()" class="modal_exit_button" type="submit">x</button></div>
                 </div>
