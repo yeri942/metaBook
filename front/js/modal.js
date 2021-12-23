@@ -1,15 +1,5 @@
 const figure = document.querySelectorAll("figure");
 
-let { author, _id, content, title, thumbnailUrl, metaUrl } = "";
-
-axios
-    .get(
-        "http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/page/detail/61c3c7c6610ab05c3a87c3fd"
-    )
-    .then((res) => {
-        let { author, _id, content, title, thumbnailUrl, metaUrl } = res.data.post;
-    });
-
 function heartToggle() {
     const heart = document.querySelector(".sprite_heart_icon_outline");
     let heart_boolean = true;
@@ -63,7 +53,7 @@ function deleteComment() {
     console.log(comment);
 }
 
-function modalHtml() {
+function modalHtml(metaUrl, title, content, thumbnailUrl, author) {
     return `<div class="modal">
             <div class="dimmed"></div>
 
@@ -74,10 +64,10 @@ function modalHtml() {
                         <img src="./asset/img/thumb.jpeg" alt="프로필이미지" />
                     </div>
                     <div class="user_name">
-                        <div class="nick_name m_text">MetaBook</div>
+                        <div class="nick_name m_text">${author.name}</div>
                     </div>
                     <div class="gather_link">
-                        <button type="submit" class="write-submit"><a href= ${metaUrl}>입장하기</button>
+                        <button type="submit" class="write-submit" onclick = "window.open('${metaUrl}')">입장하기</button>
                     </div>
                     <div class="modal_exit"><button onclick="closeModal()" class="modal_exit_button" type="submit">x</button></div>
                 </div>
@@ -85,7 +75,7 @@ function modalHtml() {
 
             <div class="img_section">
                 <div class="trans_inner">
-                    <div><img src="./asset/img/thumb02.jpg" alt="visual01" /></div>
+                    <div><img src="/api/images/${thumbnailUrl}"; /></div>
                 </div>
             </div>
 
@@ -103,11 +93,9 @@ function modalHtml() {
                 개
             </div>
             <div class = 'scroll_container' id= 'style-1'>  
-                <h3 class="maintitle">Title</h2>
+                <h3 class="maintitle">${title}</h2>
                 <div class="maintext">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati et ex labore ipsam dolores
-                    autem doloremque consequatur. Aliquid sed, placeat soluta suscipit voluptatem sunt iusto quos
-                    laboriosam, tenetur aperiam atque.
+                    ${content}
                 </div>
             </div>
                 <div class = "comment_box">
@@ -120,8 +108,8 @@ function modalHtml() {
         </div>`;
 }
 
-function modal() {
-    $("body").append(modalHtml());
+function modal(metaUrl, title, content, thumbnailUrl, author) {
+    $("body").append(modalHtml(metaUrl, title, content, thumbnailUrl, author));
     heartToggle();
     commentPost("은광");
     deleteComment();
@@ -131,7 +119,11 @@ function closeModal() {
 }
 
 figure.forEach((el) =>
-    el.addEventListener("click", () => {
-        modal();
+    el.addEventListener("click", async (e) => {
+        const objectId = e.target.parentNode.dataset.objectid;
+        res = await axios.get(`/${objectId}`);
+        console.log(res.data.post);
+        const { author, _id, content, title, thumbnailUrl, metaUrl, likes } = res.data.post;
+        modal(metaUrl, title, content, thumbnailUrl, author);
     })
 );
