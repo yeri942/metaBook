@@ -26,7 +26,7 @@ router.get("/:title", async function (req, res) {
             });
         res.json({ ok: true, post });
     } catch (err) {
-        res.json({ ok: false, message: "검색 실패", err });
+        res.json({ ok: false, message: "검색 실패", err: err });
     }
 });
 
@@ -49,7 +49,7 @@ router.put("/:postId", async function (req, res) {
         );
         res.json({ ok: true, message: "수정 완료" });
     } catch (err) {
-        res.json({ ok: false, message: "수정 실패3", err });
+        res.json({ ok: false, message: "수정 실패3", err: err });
     }
 });
 
@@ -59,7 +59,7 @@ router.delete("/:postId", async function (req, res) {
         const post = await Post.deleteOne({ _id: req.params.postId });
         res.json({ ok: true, message: "삭제 완료" });
     } catch (err) {
-        res.json({ ok: false, message: "삭제 실패", err });
+        res.json({ ok: false, message: "삭제 실패", err: err });
     }
 });
 
@@ -88,7 +88,7 @@ router.put("/:postId/like", async function (req, res) {
             });
         }
     } catch (err) {
-        res.status(500).json({ ok: false, message: "좋아요 실패", err });
+        res.status(500).json({ ok: false, message: "좋아요 실패", err: err });
     }
 });
 
