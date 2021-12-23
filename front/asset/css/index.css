@@ -23,7 +23,7 @@
     position: relative;
 }
 
-.top_board .top a {
+.top_board .top {
     width: 17rem;
     height: 17rem;
     position: relative;
@@ -134,10 +134,10 @@
     margin: 0 auto;
 }
 
-.pageItem {
+.page_board li {
     float: left;
     cursor: pointer;
-    color: white;
+    /* color: white; */
     padding-left: 2px;
     font-size: 24px;
 }

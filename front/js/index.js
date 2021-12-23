@@ -1,248 +1,111 @@
-const dummy= [
-    {
-        id:1,
-        title:'title1',
-        author:'author1',
-        thumbnailUrl:"https://static.wixstatic.com/media/c4a473_cd5a9e152a6b4f63b5082f6d39b84a02~mv2.jpeg/v1/fit/w_633,h_418,al_c,q_80/file.jpeg"
-    },
-    {
-        id:2,
-        title:'title2',
-        author:'author2',
-        thumbnailUrl:"https://lh3.googleusercontent.com/proxy/eRKzsaxTL3V5eGyXu_6OpZGT5tv_styH9UFnbci3xSxP1LQyIiJYi3IpsIRpvO31Kl59r94oxogNVx_zNCc8t8-WKV9pOAO5Q62tqSnSrIUSUT9SLMGNFyttccXYbM15ww0MB2cotBKU46tbR40"
-    },
-    {
-        id:3,
-        title:'title3',
-        author:'author3',
-        thumbnailUrl:"https://i.pinimg.com/736x/33/67/93/3367935eba2fdc86b188e2450bf67f7d.jpg"
-    },
-    {
-        id:4,
-        title:'title4',
-        author:'author4',
-        thumbnailUrl:"https://cdn.gametoc.co.kr/news/photo/202108/62478_202765_4926.jpg"
-    },
-    {
-        id:5,
-        title:'title5',
-        author:'author5',
-        thumbnailUrl:"https://jangkunblog.com/assets/img/2021/gather-town-2021.png"
-    },
-    {
-        id:6,
-        title:'title6',
-        author:'author6',
-        thumbnailUrl:"https://pbs.twimg.com/media/E0FTI-MWEAUntzL?format=jpg&name=large"
-    },
-    {
-        id:7,
-        title:'title7',
-        author:'author7',
-        thumbnailUrl:"https://i.pinimg.com/550x/c5/aa/30/c5aa30190cb3dd1bf2938e4bfe36366d.jpg"
-    },
-    {
-        id:8,
-        title:'title8',
-        author:'author8',
-        thumbnailUrl:"https://static.wixstatic.com/media/c4a473_cd5a9e152a6b4f63b5082f6d39b84a02~mv2.jpeg/v1/fit/w_633,h_418,al_c,q_80/file.jpeg"
-    },
-    {
-        id:9,
-        title:'title9',
-        author:'author9',
-        thumbnailUrl:"https://lh3.googleusercontent.com/proxy/eRKzsaxTL3V5eGyXu_6OpZGT5tv_styH9UFnbci3xSxP1LQyIiJYi3IpsIRpvO31Kl59r94oxogNVx_zNCc8t8-WKV9pOAO5Q62tqSnSrIUSUT9SLMGNFyttccXYbM15ww0MB2cotBKU46tbR40"
-    },
-    {
-        id:10,
-        title:'title10',
-        author:'author10',
-        thumbnailUrl:"https://i.pinimg.com/550x/c5/aa/30/c5aa30190cb3dd1bf2938e4bfe36366d.jpg"
-    },
-    {
-        id:11,
-        title:'title11',
-        author:'author11',
-        thumbnailUrl:"https://i.pinimg.com/550x/c5/aa/30/c5aa30190cb3dd1bf2938e4bfe36366d.jpg"
-    },
-    {
-        id:12,
-        title:'title12',
-        author:'author12',
-        thumbnailUrl:"https://i.pinimg.com/550x/c5/aa/30/c5aa30190cb3dd1bf2938e4bfe36366d.jpg"
-    },
-    {
-        id:13,
-        title:'title13',
-        author:'author13',
-        thumbnailUrl:"https://i.pinimg.com/550x/c5/aa/30/c5aa30190cb3dd1bf2938e4bfe36366d.jpg"
-    },
-    {
-        id:14,
-        title:'title14',
-        author:'author14',
-        thumbnailUrl:"https://i.pinimg.com/550x/c5/aa/30/c5aa30190cb3dd1bf2938e4bfe36366d.jpg"
-    },
-    {
-        id:15,
-        title:'title15',
-        author:'author15',
-        thumbnailUrl:"https://i.pinimg.com/550x/c5/aa/30/c5aa30190cb3dd1bf2938e4bfe36366d.jpg"
-    },
-    {
-        id:16,
-        title:'title16',
-        author:'author16',
-        thumbnailUrl:"https://i.pinimg.com/550x/c5/aa/30/c5aa30190cb3dd1bf2938e4bfe36366d.jpg"
-    },
-    {
-        id:17,
-        title:'title17',
-        author:'author17',
-        thumbnailUrl:"https://i.pinimg.com/550x/c5/aa/30/c5aa30190cb3dd1bf2938e4bfe36366d.jpg"
-    },
-]
-
-function getPosts(){
-    //전체 posts 요청
-    axios.get('http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com//api/post')
-    .then(response=>{
-
-    })
-    console.log(posts);
-    
-}
-
-
-
 const target_board_page=document.querySelector("#board_page");
 const target_top=document.querySelector(".top");
 const target_board_content=document.querySelector(".board_content");
 
-function render(datas){
-    target_board_content.innerHTML='';
-    target_top.innerHTML='';
-
-    for (let i=0; i<3; i++){
-        const alink_top =document.createElement("a");
-        const figure_top=document.createElement("figure");
-        const figcaption_top=document.createElement("figcaption");
-        const title_top = document.createElement("span");
-        const author_top = document.createElement("span");
-        const thumb_top= document.createElement("img");
-
-        alink_top.setAttribute('href',"#");
-        
-        title_top.className="title";
-        author_top.className="writer";
-
-        title_top.innerText=dummy[i].title;
-        author_top.innerText=dummy[i].author;
-        thumb_top.src=dummy[i].thumbnailUrl;
-
-        figure_top.appendChild(thumb_top);
-        
-        figcaption_top.appendChild(title_top);
-        figcaption_top.appendChild(author_top);
-        
-        figure_top.appendChild(figcaption_top);
-        alink_top.appendChild(figure_top);
-
-        target_top.appendChild(alink_top);
-    }
-
-    const board_ul = document.createElement("ul");
-    const board_article = document.createElement('article');
-    
-    datas.forEach(data => {
-        const board_li = document.createElement("li");
-        const board_alink = document.createElement("a");
-        const board_figure= document.createElement("figure");
-        const board_figcaption= document.createElement("figcaption");
-        const board_title= document.createElement("span");
-        const board_author= document.createElement("span");
-        const board_thumb= document.createElement("img");
-
-        board_alink.setAttribute('href',"#");
-        board_title.className="title";
-        board_author.className="writer";
-        board_thumb.className="topPosts_1st";
-        
-        board_title.innerText=data.title;
-        board_author.innerText=data.author;
-        board_thumb.src=data.thumbnailUrl;
-
-        
-        board_figure.appendChild(board_thumb);
-        
-        board_figcaption.appendChild(board_title);
-        board_figcaption.appendChild(board_author);
-        board_figure.appendChild(board_figcaption);
-        board_alink.appendChild(board_figure);
-        board_li.appendChild(board_alink);
-        board_ul.appendChild(board_li);
+//게시물을 화면에 그려주는 함수
+async function render(page){
+    const posts= await axios.get(`http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/page/${page}`);
+    //인기 게시물 그리기
+    $(".top").empty();
+    posts.data.top3Post.forEach(top_post=>{
+        $(".top").append(
+            `<figure data-objectid=${top_post._id}>
+                <img src=http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/images/${top_post.thumbnailUrl}>
+                    <figcaption>
+                        <span class="title">${top_post.title}</span>
+                        <span class="writer">${top_post.author.name}</span>
+                    </figcaption>
+            </figure>`
+        );
     })
 
-    target_board_content.appendChild(board_ul);
+    //일반 게시물 그리기
+    $(".board_content ul").empty();
+
+    posts.data.posts.forEach(post => {        
+        $(".board_content ul").append(
+            `<li>
+                <a href=${post.metaUrl}>
+                    <figure data-objectid=${post._id}>
+                        <img src=http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/images/${post.thumbnailUrl}>
+                        <figcaption>
+                            <span class="title">${post.title}</span>
+                            <span class="writer">${post.author.name}</span>
+                        </figcaption>
+                    </figure>
+                </a>
+            </li>`
+        );
+    }); 
 
 }
 
-window.addEventListener('DOMContentLoaded',()=>{
-    render(dummy);
-});
-
-
-function paginate(totaldata,currPage){
-    const perPage=20; //4*5
-    const pageCount=5; //한 번에 몇개 페이지 까지 보일지
-
-    console.log(`currPage: ${currPage}`);
-    console.log(`totalData: ${totaldata}`);
-
-    const totalPage=Math.ceil(totaldata/perPage);
-    const pageGroup=Math.ceil(currPage/pageCount);
-
-    console.log(`pageGroup: ${pageGroup}`);
-    console.log(`totalPage: ${totalPage}`);
-
-
-    let last=pageGroup*pageCount; //화면에 보여질 마지막 페이지 번호
-    if (last>totalPage) last=totalPage;
-    let first=last-(pageCount-1); //화면에 보여질 첫번째 페이지 번호
-    const next=last+1;
-    const prev=first-1;
-
-    console.log(`last:${last}`);
-    console.log(`first:${first}`);
-    console.log(`next:${next}`);
-    console.log(`prev:${prev}`);
-
-    if (totalPage<1) first = last;
-    const pages=$(".pages"); //JQuery.empty() => 태그를 포함한 요소의 내용 삭제.
-    pages.empty();
+//화면에 보여줄 페이지 그리기 
+function paginate(first,last,prev,next,totalPage,currPage){
+    $(".pages").empty();
     
     if (first>5){
-        pages.append(
-            `<li><a onclick=location.href='#'>prev</a></li>`
+        $(".pages").append(
+            `<li class="prev"><a onclick="render(${prev});"> &lt; </a></li>`
         );
     }
+    //마지막 페이지 처리
+    const checked_first= (last===totalPage) && (last-currPage<4) ? Math.floor(last/5)*5+1 : first; 
 
-    for (let j=first; j<=last; j++){
-        if(currPage===j){ pages.append(`<li class="pageItem"><a onclick=location.href='#'>${j}</a></li>`);
-        }else if (j>0){
-            pages.append(`<li class="pageItem"><a onclick=location.href='#'>${j}</a></li>`);
-        }
+    for (let j=checked_first; j<=last; j++){
+        //page가 현재 페이지이면 파란색으로, 아니면 검정색으로 변경
+        if (j===currPage) 
+            $(".pages").append(`<li><a href="#" style='color:blue'>${j}</a></li>`);    
+        else
+            $(".pages").append(`<li><a href="#" style='color:black'>${j}</a></li>`);    
     }
-    if (next>5 && next<totalPage){
-        pages.append(`<li class="pageItem"><a onclick=location.href='#'>다음</a></li>`);
-    }
-   
+      
+    if (next>5 && next<=totalPage){ 
+        $(".pages").append(`<li class="next"> &gt; </a></li>`);
+    } 
+    
+    $(".pages li a").click(function(e){
+        e.preventDefault();
+
+        var num=Number(e.target.textContent);
+        console.log(num);
+        render(num);
+        paging(num);
+    });
+
+    $(".pages li.prev").click(function(e){
+        e.preventDefault();
+        $(".pages").empty();
+        render(prev);
+        paging(prev);
+    });
+    
+    $(".pages li.next").click(function(e){
+        e.preventDefault();
+        $(".pages").empty();
+        render(next);
+        paging(next);
+    });
 }
 
-//첫 랜딩 페이지는 1페이지에 있는 게시물들을 불러온다. 
-//onclick= func(page)를 구현해 보드의 내용을 지우고, 해당 페이지에 맞는 게시물들을 가져와야함.
+//페이지 정보 불러오고 안에서 first,last,prev,next,totalPage,currPage 정해서 pagenate 함수 실행해주기
+async function paging(currPage){
+    const page_infor= await axios.get(`http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/page/${currPage}`);
+    const {totalPage,perPage}= page_infor.data;
+    
+    const pageCount=5; //표시할 페이지 수
+    const pageGroup=Math.ceil(currPage/pageCount);
 
+    let last=pageGroup*pageCount > totalPage ? totalPage : pageGroup*pageCount ; //화면에 보여질 마지막 페이지 번호
+    let first=last-(pageCount-1)<= 0 ? 1 : last-(pageCount-1); //화면에 보여질 첫번째 페이지 번호
+    const next=last+1;
+    const prev=first-1;
+    
+    paginate(first,last,prev,next,totalPage,currPage); 
+}
 
-const dummy_num=Object.keys(dummy).length;
-console.log(`dummy 개수: ${dummy_num}`);
-paginate(dummy_num,1);
+//처음 메인페이지 접속 시 1 페이지 정보 불러오기
+window.addEventListener('DOMContentLoaded',()=>{
+    render(1);
+    paging(1);
+});
