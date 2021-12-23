@@ -62,7 +62,7 @@ function deleteComment() {
     console.log(comment);
 }
 
-function modalHtml() {
+function modalHtml(metaUrl, title, content, thumbnailUrl, author) {
     return `<div class="modal">
             <div class="dimmed"></div>
 
@@ -73,10 +73,10 @@ function modalHtml() {
                         <img src="./asset/img/thumb.jpeg" alt="프로필이미지" />
                     </div>
                     <div class="user_name">
-                        <div class="nick_name m_text">MetaBook</div>
+                        <div class="nick_name m_text">${author.name}</div>
                     </div>
                     <div class="gather_link">
-                        <button type="submit" class="write-submit">입장하기</button>
+                        <button type="submit" class="write-submit" onclick = "window.open('${metaUrl}')">입장하기</button>
                     </div>
                     <div class="modal_exit">
                         <button onclick="closeModal()" class="modal_exit_button" type="submit">x</button>
@@ -86,7 +86,7 @@ function modalHtml() {
 
             <div class="img_section">
                 <div class="trans_inner">
-                    <div><img src="./asset/img/thumb02.jpg" alt="visual01" /></div>
+                    <div><img src="/api/images/${thumbnailUrl}"; /></div>
                 </div>
             </div>
 
@@ -104,11 +104,9 @@ function modalHtml() {
                 개
             </div>
             <div class = 'scroll_container' id= 'style-1'>  
-                <h3 class="maintitle">Title</h2>
+                <h3 class="maintitle">${title}</h2>
                 <div class="maintext">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati et ex labore ipsam dolores
-                    autem doloremque consequatur. Aliquid sed, placeat soluta suscipit voluptatem sunt iusto quos
-                    laboriosam, tenetur aperiam atque.
+                    ${content}
                 </div>
             </div>
                 <div class = "comment_box">
@@ -121,8 +119,10 @@ function modalHtml() {
         </div>`;
 }
 
-function modal() {
-    $("#modal-select").append(modalHtml());
+function modal(metaUrl, title, content, thumbnailUrl, author) {
+    $("#modal-select").append(
+        modalHtml(metaUrl, title, content, thumbnailUrl, author)
+    );
     heartToggle();
     commentPost("은광");
     // deleteComment();
@@ -132,9 +132,14 @@ function closeModal() {
 }
 
 figure.forEach((el) =>
-    el.addEventListener("click", () => {
-        modal();
+    el.addEventListener("click", async (e) => {
         preventAction(false);
+        const objectId = e.target.parentNode.dataset.objectid;
+        res = await axios.get(`/${objectId}`);
+        console.log(res.data.post);
+        const { author, _id, content, title, thumbnailUrl, metaUrl, likes } =
+            res.data.post;
+        modal(metaUrl, title, content, thumbnailUrl, author);
     })
 );
 
