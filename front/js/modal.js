@@ -56,6 +56,19 @@ function commentPost(author) {
     });
 }
 
+function closeModal() {
+    const modal_exit = document.querySelector(".modal_exit_button");
+    const dimmed_exit = document.querySelector(".dimmed");
+    modal_exit.addEventListener("click", () => {
+        document.querySelector(".modal").remove();
+        $("html, body").removeClass("not_scroll");
+    });
+    dimmed_exit.addEventListener("click", () => {
+        document.querySelector(".modal").remove();
+        $("html, body").removeClass("not_scroll");
+    });
+}
+
 function deleteComment() {
     const deleteBtn = document.querySelector(".comment_delete");
     const comment = deleteBtn.parentNode;
@@ -79,7 +92,7 @@ function modalHtml(metaUrl, title, content, thumbnailUrl, author) {
                         <button type="submit" class="write-submit" onclick = "window.open('${metaUrl}')">입장하기</button>
                     </div>
                     <div class="modal_exit">
-                        <button onclick="closeModal()" class="modal_exit_button" type="submit">x</button>
+                        <div class="modal_exit_button" >x</div>
                     </div>
                 </div>
             </header>
@@ -136,11 +149,9 @@ function modal(metaUrl, title, content, thumbnailUrl, author) {
         modalHtml(metaUrl, title, content, thumbnailUrl, author)
     );
     heartToggle();
+    closeModal();
     commentPost("은광");
     // deleteComment();
-}
-function closeModal() {
-    document.querySelector(".modal").remove();
 }
 
 figure.forEach((el) =>
@@ -153,6 +164,7 @@ figure.forEach((el) =>
         const { author, _id, content, title, thumbnailUrl, metaUrl, likes } =
             res.data.post;
         modal(metaUrl, title, content, thumbnailUrl, author);
+        $("html, body").addClass("not_scroll");
         preventAction(userId);
     })
 );

@@ -3,7 +3,6 @@ import { getUserId, generateLogout, preventAccess } from "./util.js";
 
 let userId = null;
 window.addEventListener("DOMContentLoaded", async () => {
-    userId = await getUserId();
     generateLogout(userId);
     preventAccess(!userId);
 });
@@ -216,13 +215,3 @@ signup_passwordConfirm.addEventListener("input", (e) => {
 $togglePass.addEventListener("click", passwordToggle);
 $togglePass_Sign.addEventListener("click", Signup_passwordToggle);
 $togglePass_Sign_Check.addEventListener("click", Signup_passwordToggle);
-
-axios
-    .get(
-        "http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/user"
-    )
-    .then((res) => {
-        console.log(res.user);
-    });
-
-test();
