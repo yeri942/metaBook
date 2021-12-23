@@ -112,7 +112,7 @@ function modalHtml(metaUrl, title, content, thumbnailUrl, author) {
 
             <div class="img_section">
                 <div class="trans_inner">
-                    <div><img src="/api/images/${thumbnailUrl}"; /></div>
+                    <div><img src="http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/images/${thumbnailUrl}"; /></div>
                 </div>
             </div>
 
@@ -136,7 +136,7 @@ function modalHtml(metaUrl, title, content, thumbnailUrl, author) {
                 </div>
             </div>
             <div class="comment_field" id="add-comment-post37">
-                <input type="text" placeholder="comment" class="comment_text" />
+                <input type="text" placeholder="comment" class="comment_text" spellcheck="false" />
                 <button id="commentUpload" class="upload_btn m_text" data-name="comment">댓글등록</button>
             </div>
         </article>
