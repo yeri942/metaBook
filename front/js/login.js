@@ -217,8 +217,12 @@ $togglePass.addEventListener("click", passwordToggle);
 $togglePass_Sign.addEventListener("click", Signup_passwordToggle);
 $togglePass_Sign_Check.addEventListener("click", Signup_passwordToggle);
 
-axios.get("http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/user").then((res) => {
-    console.log(res.user);
-});
+axios
+    .get(
+        "http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/user"
+    )
+    .then((res) => {
+        console.log(res.user);
+    });
 
 test();

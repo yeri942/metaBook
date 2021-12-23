@@ -3,7 +3,7 @@ import { getUserId, generateLogout, preventAction } from "./util.js";
 
 let userId = null;
 window.addEventListener("DOMContentLoaded", async () => {
-    userId = await getUserId();
+    // userId = await getUserId();
     generateLogout(userId);
 });
 
@@ -86,7 +86,7 @@ function modalHtml(metaUrl, title, content, thumbnailUrl, author) {
 
             <div class="img_section">
                 <div class="trans_inner">
-                    <div><img src="/api/images/${thumbnailUrl}"; /></div>
+                    <div><img src="http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/images/${thumbnailUrl}"; /></div>
                 </div>
             </div>
 
@@ -109,7 +109,19 @@ function modalHtml(metaUrl, title, content, thumbnailUrl, author) {
                     ${content}
                 </div>
             </div>
-                <div class = "comment_box">
+                <div class = "comment_box" id="style-1">
+                    <div>hello</div>
+                    <div>hello</div>
+                    <div>hello</div>
+                    <div>hello</div>
+                    <div>hello</div>
+                    <div>hello</div>
+                    <div>hello</div>
+                    <div>hello</div>
+                    <div>hello</div>
+                    <div>hello</div>
+                    <div>hello</div>
+                    <div>hello</div>
                 </div>
             <div class="comment_field" id="add-comment-post37">
                 <input type="text" placeholder="comment" class="comment_text" />
@@ -133,17 +145,14 @@ function closeModal() {
 
 figure.forEach((el) =>
     el.addEventListener("click", async (e) => {
-        preventAction(false);
         const objectId = e.target.parentNode.dataset.objectid;
-        res = await axios.get(`/${objectId}`);
+        const res = await axios.get(
+            `http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/page/detail/${objectId}`
+        );
         console.log(res.data.post);
         const { author, _id, content, title, thumbnailUrl, metaUrl, likes } =
             res.data.post;
         modal(metaUrl, title, content, thumbnailUrl, author);
+        preventAction(userId);
     })
 );
-
-const closeBtn = document.querySelector(".modal_exit_button");
-closeBtn.addEventListener("click", () => {
-    closeModal();
-});
