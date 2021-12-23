@@ -1,4 +1,5 @@
 const { Schema } = require("mongoose");
+const CommentSchema = require("./Comment");
 
 const postSchema = new Schema(
     {
@@ -26,16 +27,12 @@ const postSchema = new Schema(
         likes: {
             type: Array,
             default: [],
-            // require: true,
         },
         likeCount: {
             type: Number,
             default: 0,
         },
-        comments: {
-            type: Array,
-            default: [],
-        },
+        comments: [CommentSchema],
         tags: {
             type: Array,
             default: [],
