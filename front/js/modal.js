@@ -1,3 +1,12 @@
+// ---------------import -------------------------
+import { getUserId, generateLogout, preventAction } from "./util.js";
+
+let userId = null;
+window.addEventListener("DOMContentLoaded", async () => {
+    userId = await getUserId();
+    generateLogout(userId);
+});
+
 const figure = document.querySelectorAll("figure");
 
 function heartToggle() {
@@ -69,7 +78,9 @@ function modalHtml() {
                     <div class="gather_link">
                         <button type="submit" class="write-submit">입장하기</button>
                     </div>
-                    <div class="modal_exit"><button onclick="closeModal()" class="modal_exit_button" type="submit">x</button></div>
+                    <div class="modal_exit">
+                        <button onclick="closeModal()" class="modal_exit_button" type="submit">x</button>
+                    </div>
                 </div>
             </header>
 
@@ -104,17 +115,17 @@ function modalHtml() {
                 </div>
             <div class="comment_field" id="add-comment-post37">
                 <input type="text" placeholder="comment" class="comment_text" />
-                <div id="commentUpload" class="upload_btn m_text" data-name="comment">댓글등록</div>
+                <button id="commentUpload" class="upload_btn m_text" data-name="comment">댓글등록</button>
             </div>
         </article>
         </div>`;
 }
 
 function modal() {
-    $("body").append(modalHtml());
+    $("#modal-select").append(modalHtml());
     heartToggle();
     commentPost("은광");
-    deleteComment();
+    // deleteComment();
 }
 function closeModal() {
     document.querySelector(".modal").remove();
@@ -123,5 +134,11 @@ function closeModal() {
 figure.forEach((el) =>
     el.addEventListener("click", () => {
         modal();
+        preventAction(false);
     })
 );
+
+const closeBtn = document.querySelector(".modal_exit_button");
+closeBtn.addEventListener("click", () => {
+    closeModal();
+});
