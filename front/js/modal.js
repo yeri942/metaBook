@@ -120,12 +120,10 @@ function modalHtml(metaUrl, title, content, thumbnailUrl, author) {
 }
 
 function modal(metaUrl, title, content, thumbnailUrl, author) {
-    $("#modal-select").append(
-        modalHtml(metaUrl, title, content, thumbnailUrl, author)
-    );
+    $("#modal-select").append(modalHtml(metaUrl, title, content, thumbnailUrl, author));
     heartToggle();
     commentPost("은광");
-    // deleteComment();
+    deleteComment();
 }
 function closeModal() {
     document.querySelector(".modal").remove();
@@ -139,13 +137,7 @@ figure.forEach((el) =>
             `http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/page/detail/${objectId}`
         );
         console.log(res.data.post);
-        const { author, _id, content, title, thumbnailUrl, metaUrl, likes } =
-            res.data.post;
+        const { author, _id, content, title, thumbnailUrl, metaUrl, likes } = res.data.post;
         modal(metaUrl, title, content, thumbnailUrl, author);
     })
 );
-
-const closeBtn = document.querySelector(".modal_exit_button");
-closeBtn.addEventListener("click", () => {
-    closeModal();
-});
