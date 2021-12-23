@@ -26,20 +26,21 @@ router.get("/:title", async function (req, res) {
             });
         res.json({ ok: true, post });
     } catch (err) {
-        res.json({ ok: false, message: "검색 실패", err: err });
+        res.json({ ok: false, message: "검색 실패", err });
     }
 });
 
 //update
 router.put("/:postId", async function (req, res) {
+    const user = req.user.id;
+    const post = await Post.findOne({ _id: req.params.postId }).populate(
+        "author"
+    );
     try {
-        const post = await Post.findOne({ _id: req.params.postId }).populate(
-            "author"
-        );
         if (!post) {
             return res.json({ ok: false, message: "수정 실패1" });
         }
-        if (req.body.userId !== post.author._id) {
+        if (user !== post.author.id) {
             return res.json({ ok: false, message: "수정 실패2" });
         }
         //$set =>정보가 없는걸 빈칸으로 하지않고 바뀐 내용만 저장하는것!
@@ -49,17 +50,27 @@ router.put("/:postId", async function (req, res) {
         );
         res.json({ ok: true, message: "수정 완료" });
     } catch (err) {
-        res.json({ ok: false, message: "수정 실패3", err: err });
+        res.json({ ok: false, message: "수정 실패3", err });
     }
 });
 
 //delete
 router.delete("/:postId", async function (req, res) {
+    const user = req.user.id;
+    const post = await Post.findOne({ _id: req.params.postId });
     try {
-        const post = await Post.deleteOne({ _id: req.params.postId });
-        res.json({ ok: true, message: "삭제 완료" });
+        if (post.author._id == user) {
+            await Post.deleteOne({ _id: req.params.postId });
+            res.json({ ok: true, message: "삭제 완료" });
+        } else {
+            res.json({
+                ok: false,
+                message: "해당 게시글의 작성자가 아닙니다.",
+            });
+        }
     } catch (err) {
-        res.json({ ok: false, message: "삭제 실패", err: err });
+        console.log(err);
+        res.json({ ok: false, message: "삭제 실패", err });
     }
 });
 
@@ -88,7 +99,7 @@ router.put("/:postId/like", async function (req, res) {
             });
         }
     } catch (err) {
-        res.status(500).json({ ok: false, message: "좋아요 실패", err: err });
+        res.status(500).json({ ok: false, message: "좋아요 실패", err });
     }
 });
 
