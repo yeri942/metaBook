@@ -3,7 +3,7 @@ import { getUserId, generateLogout, preventAction } from "./util.js";
 
 let userId = null;
 window.addEventListener("DOMContentLoaded", async () => {
-    // userId = await getUserId();
+    userId = await getUserId();
     generateLogout(userId);
 });
 
@@ -99,43 +99,29 @@ function modalHtml(metaUrl, title, content, thumbnailUrl, author) {
 
             <div class="img_section">
                 <div class="trans_inner">
-                    <div><img src="http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/images/${thumbnailUrl}"; /></div>
+                    <div><img src="/api/images/${thumbnailUrl}"; /></div>
                 </div>
             </div>
 
-            <div class="bottom_icons">
-                <div class="left_icons">
-                    <div class="heart_btn">
-                        <div class="sprite_heart_icon_outline" name="39" data-name="heartbeat"></div>
-                    </div>
-                    <div class="sprite_bubble_icon"></div>
-                </div>
-            </div>
-            <div class="likes m_text">
-                좋아요
-                <span id="like-count-39">999</span>
-                개
-            </div>
             <div class = 'scroll_container' id= 'style-1'>  
-                <h3 class="maintitle">${title}</h2>
+                <div class="bottom_icons">
+                    <h3 class="maintitle">${title}</h3>
+                    <div class="left_icons">
+                        <div class="heart_btn">
+                            <div class="sprite_heart_icon_outline" name="39" data-name="heartbeat"></div>
+                        </div>
+                        
+                        <div class="likes m_text">
+                            <span id="like-count-39">999</span>
+                        </div>
+                    </div>
+                </div>
                 <div class="maintext">
                     ${content}
                 </div>
-            </div>
-                <div class = "comment_box" id="style-1">
-                    <div>hello</div>
-                    <div>hello</div>
-                    <div>hello</div>
-                    <div>hello</div>
-                    <div>hello</div>
-                    <div>hello</div>
-                    <div>hello</div>
-                    <div>hello</div>
-                    <div>hello</div>
-                    <div>hello</div>
-                    <div>hello</div>
-                    <div>hello</div>
+                <div class = "comment_box">
                 </div>
+            </div>
             <div class="comment_field" id="add-comment-post37">
                 <input type="text" placeholder="comment" class="comment_text" />
                 <button id="commentUpload" class="upload_btn m_text" data-name="comment">댓글등록</button>
