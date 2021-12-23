@@ -75,7 +75,7 @@ function modalHtml(metaUrl, title, content, thumbnailUrl, author) {
 
             <div class="img_section">
                 <div class="trans_inner">
-                    <div><img src="/api/images/${thumbnailUrl}"; /></div>
+                    <div><img src="http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/images/${thumbnailUrl}"; /></div>
                 </div>
             </div>
 
@@ -121,7 +121,9 @@ function closeModal() {
 figure.forEach((el) =>
     el.addEventListener("click", async (e) => {
         const objectId = e.target.parentNode.dataset.objectid;
-        res = await axios.get(`/${objectId}`);
+        res = await axios.get(
+            `http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/page/detail/${objectId}`
+        );
         console.log(res.data.post);
         const { author, _id, content, title, thumbnailUrl, metaUrl, likes } = res.data.post;
         modal(metaUrl, title, content, thumbnailUrl, author);
