@@ -59,8 +59,12 @@ app.use("/api/page", page_router);
 app.use("/api/comment", com_router);
 
 app.post("/api/upload", upload.single("userfile"), function (req, res) {
+    const filename = req.file.filename;
     try {
-        res.json({ ok: true, thumbnailUrl: req.file.filename });
+        if (filename.includes(" ")) {
+            filename.replace(" ", "_");
+        }
+        res.json({ ok: true, thumbnailUrl: filename });
     } catch (err) {
         res.json({ ok: false });
     }
