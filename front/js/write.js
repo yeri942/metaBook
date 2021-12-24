@@ -14,9 +14,9 @@ const postId = window.location.href.split("?")[1];
 //------- 수정 화면 렌더 ----------
 let userId = null;
 window.addEventListener("DOMContentLoaded", async () => {
-    // userId = await getUserId();
+    userId = await getUserId();
     generateLogout(userId);
-    preventAccess(userId);
+    preventAccess(true);
     if (postId) {
         getPostContent(postId);
     }
@@ -78,6 +78,9 @@ async function requestUploadPost(file, postId) {
         (!textData.metaUrl.includes("gather") || !regex.test(textData.metaUrl))
     )
         return alert("올바른 url을 입력해 주세요");
+
+    if (!file) return alert("이미지는 필수 요소입니다.");
+
     if (file) {
         const data = new FormData();
         data.append("userfile", file);

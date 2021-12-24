@@ -29,7 +29,7 @@ window.addEventListener("DOMContentLoaded", async () => {
                 likeCount
             );
             $("html, body").addClass("not_scroll");
-            preventAction(true);
+            preventAction(userId);
             //true : 로그인 false : 로그아웃 !
         })
     );
