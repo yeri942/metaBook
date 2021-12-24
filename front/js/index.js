@@ -10,13 +10,14 @@ export async function render(page) {
     //인기 게시물 그리기
     $(".top").empty();
     posts.data.top3Post.forEach((top_post) => {
+        console.log(top_post.author);
         $(".top").append(
             `<div>
                 <figure data-objectid=${top_post._id}>
                     <img src= http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/images/${top_post.thumbnailUrl}>
                         <figcaption>
                             <span class="title">${top_post.title}</span>
-                            <span class="writer">${top_post.author.name}</span>
+                            <span class="writer">${top_post.author}</span>
                         </figcaption>
                 </figure>
             </div>`
