@@ -87,11 +87,9 @@ function modalHtml(metaUrl, title, content, thumbnailUrl, author, likeCount) {
                 <article class="contents">
                     <header class="top">
                         <div class="user_container">
-                            <div class="profile_img">
-                                <img src="./asset/img/thumb.jpeg" alt="프로필이미지" />
-                            </div>
+                            
                             <div class="user_name">
-                                <div class="nick_name m_text">${author.name}</div>
+                                <div class="nick_name">${author.name}</div>
                             </div>
                             <div class="gather_link">
                                 <button type="submit" class="write-submit" onclick = "window.open('${metaUrl}')">입장하기</button>
