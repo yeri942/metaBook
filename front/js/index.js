@@ -56,7 +56,7 @@ export function paginate(first, last, prev, next, totalPage, currPage) {
 
     if (next > 5 && next <= totalPage) $(".pages").append(`<li class="next"> &gt; </a></li>`);
 
-    $(".pages li a").click(function (e) {
+    $(".pages li button").click(function (e) {
         e.preventDefault();
         var num = Number(e.target.textContent);
         render(num);
@@ -97,7 +97,7 @@ export async function paging(currPage) {
 }
 
 //처음 메인페이지 접속 시 1 페이지 정보 불러오기
-window.addEventListener("DOMContentLoaded", () => {
-    render(1);
-    paging(1);
-});
+// window.addEventListener("DOMContentLoaded", () => {
+//     render(1);
+//     paging(1);
+// });

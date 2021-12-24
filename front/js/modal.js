@@ -22,7 +22,7 @@ window.addEventListener("DOMContentLoaded", async () => {
             console.log(likes.includes("61c35dfce7e0d57cfd1a7cb1"));
             modal(metaUrl, title, content, thumbnailUrl, author, objectId, likeCount, likes);
             $("html, body").addClass("not_scroll");
-            preventAction(true);
+            preventAction(userId);
             //true : 로그인 false : 로그아웃 !
         })
     );
@@ -88,11 +88,9 @@ function modalHtml(metaUrl, title, content, thumbnailUrl, author, likeCount) {
                 <article class="contents">
                     <header class="top">
                         <div class="user_container">
-                            <div class="profile_img">
-                                <img src="./asset/img/thumb.jpeg" alt="프로필이미지" />
-                            </div>
+                            
                             <div class="user_name">
-                                <div class="nick_name m_text">${author.name}</div>
+                                <div class="nick_name">${author.name}</div>
                             </div>
                             <div class="gather_link">
                                 <button type="submit" class="write-submit" onclick = "window.open('${metaUrl}')">입장하기</button>
