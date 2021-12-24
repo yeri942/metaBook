@@ -25,15 +25,13 @@ async function render(page){
     posts.data.posts.forEach(post => {        
         $(".board_content ul").append(
             `<li>
-                <a href=${post.metaUrl}>
-                    <figure data-objectid=${post._id}>
-                        <img src= /api/images/${post.thumbnailUrl}>
-                        <figcaption>
-                            <span class="title">${post.title}</span>
-                            <span class="writer">${post.author.name}</span>
-                        </figcaption>
-                    </figure>
-                </a>
+                <figure data-objectid=${post._id}>
+                    <img src= /api/images/${post.thumbnailUrl}>
+                    <figcaption>
+                        <span class="title">${post.title}</span>
+                        <span class="writer">${post.author.name}</span>
+                    </figcaption>
+                </figure>
             </li>`
         );
     }); 
