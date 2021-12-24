@@ -146,6 +146,7 @@
     color: #fff;
 }
 
+<<<<<<< HEAD
 @media (max-width: 1400px) {
     .top_board .top {
         gap: 20px;
@@ -272,4 +273,16 @@
         width: 15rem;
         height: 15rem;
     }
+=======
+.page_board {
+    margin: 0 auto;
+}
+
+.page_board li {
+    float: left;
+    cursor: pointer;
+    /* color: white; */
+    padding-left: 2px;
+    font-size: 24px;
+>>>>>>> 9be2d2cbae1b189ea1c05d75825546db8934f0e6
 }
