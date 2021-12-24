@@ -1,13 +1,11 @@
 // ---------------import -------------------------
 import { getUserId, generateLogout, preventAction } from "./util.js";
-
+const figure = document.querySelectorAll("figure");
 let userId = null;
 window.addEventListener("DOMContentLoaded", async () => {
     userId = await getUserId();
     generateLogout(userId);
 });
-
-const figure = document.querySelectorAll("figure");
 
 // 좋아요 토글 함수
 function heartToggle() {
@@ -113,7 +111,7 @@ function commentRendering(comment_box, objectId, commentId) {
         });
 }
 
-// 댓글삭제 이벤트 생성 함수. 이게 진짜 렌더링 .. ? 나중에는 이걸 전부 적용해줘야할듯
+// 댓글삭제 이벤트 생성 함수
 function commentRender(objectId) {
     axios
         .get(`http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/comment/${objectId}`)

@@ -4,14 +4,16 @@ const target_board_content = document.querySelector(".board_content");
 
 //게시물을 화면에 그려주는 함수
 async function render(page) {
-    const posts = await axios.get(`/api/page/${page}`);
+    const posts = await axios.get(
+        `http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/page/${page}`
+    );
     //인기 게시물 그리기
     $(".top").empty();
     posts.data.top3Post.forEach((top_post) => {
         $(".top").append(
             `<div>
                 <figure data-objectid=${top_post._id}>
-                    <img src= /api/images/${top_post.thumbnailUrl}>
+                    <img src= http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/images/${top_post.thumbnailUrl}>
                         <figcaption>
                             <span class="title">${top_post.title}</span>
                             <span class="writer">${top_post.author.name}</span>
@@ -26,7 +28,7 @@ async function render(page) {
         $(".board_content ul").append(
             `<li>
                 <figure data-objectid=${post._id}>
-                    <img src= /api/images/${post.thumbnailUrl}>
+                    <img src= http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/images/${post.thumbnailUrl}>
                     <figcaption>
                         <span class="title">${post.title}</span>
                         <span class="writer">${post.author.name}</span>
@@ -78,7 +80,9 @@ function paginate(first, last, prev, next, totalPage, currPage) {
 
 //페이지 정보 불러오고 안에서 first,last,prev,next,totalPage,currPage 정해서 pagenate 함수 실행해주기
 async function paging(currPage) {
-    const page_infor = await axios.get(`/api/page/${currPage}`);
+    const page_infor = await axios.get(
+        `http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/page/${currPage}`
+    );
     const { totalPage, perPage } = page_infor.data;
 
     const pageCount = 5; //표시할 페이지 수
