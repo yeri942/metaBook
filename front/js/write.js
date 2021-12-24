@@ -16,7 +16,7 @@ let userId = null;
 window.addEventListener("DOMContentLoaded", async () => {
     userId = await getUserId();
     generateLogout(userId);
-    preventAccess(true);
+    preventAccess(userId);
     if (postId) {
         getPostContent(postId);
     }
@@ -49,7 +49,6 @@ inputFile.addEventListener("change", (e) => {
 });
 
 function showFile(file) {
-    // console.log(URL.createObjectURL(file));
     thumb_img.classList.add("show");
     thumb_img.src = URL.createObjectURL(file);
     filename.textContent = file.name;
