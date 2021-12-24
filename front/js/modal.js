@@ -1,10 +1,29 @@
 // ---------------import -------------------------
 import { getUserId, generateLogout, preventAction } from "./util.js";
-const figure = document.querySelectorAll("figure");
+import { render, paginate, paging } from "./index.js";
+
 let userId = null;
+
 window.addEventListener("DOMContentLoaded", async () => {
     // userId = await getUserId();
     generateLogout(userId);
+    await render(1);
+    await paging(1);
+    const figure = document.querySelectorAll("figure");
+    figure.forEach((el) =>
+        el.addEventListener("click", async (e) => {
+            const objectId = e.target.parentNode.dataset.objectid;
+            const res = await axios.get(
+                `http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/page/detail/${objectId}`
+            );
+            const { author, content, title, thumbnailUrl, metaUrl, likes } =
+                res.data.post;
+            modal(metaUrl, title, content, thumbnailUrl, author, objectId);
+            $("html, body").addClass("not_scroll");
+            preventAction(true);
+            //true : 로그인 false : 로그아웃 !
+        })
+    );
 });
 
 // 좋아요 토글 함수
@@ -65,11 +84,11 @@ function modalHtml(metaUrl, title, content, thumbnailUrl, author) {
                             </div>
                         </header>
 
-            <div class="img_section">
-                <div class="trans_inner">
-                    <div><img src="http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/images/${thumbnailUrl}"; /></div>
-                </div>
-            </div>
+                        <div class="img_section">
+                            <div class="trans_inner">
+                                <div><img src="http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/images/${thumbnailUrl}"; /></div>
+                            </div>
+                        </div>
 
                         <div class = 'scroll_container' id= 'style-1'>  
                             <div class="bottom_icons">
@@ -90,13 +109,13 @@ function modalHtml(metaUrl, title, content, thumbnailUrl, author) {
                             <div class = "comment_box">
                             </div>
                         </div>
+                        <div class="comment_field" id="add-comment-post37">
+                            <input type="text" placeholder="comment" class="comment_text" />
+                            <button id="commentUpload" class="upload_btn m_text" data-name="comment">댓글등록</button>
                         </div>
-            <div class="comment_field" id="add-comment-post37">
-                <input type="text" placeholder="comment" class="comment_text" spellcheck="false" />
-                <button id="commentUpload" class="upload_btn m_text" data-name="comment">댓글등록</button>
-            </div>
-        </article>
-        </div>`;
+                    </article>
+                </div>
+            </div>`;
 }
 // 댓글을 재로딩 해주는 함수 - 기존 댓글을 다지우고, 전부 새로 불러온다.
 function commentRendering(comment_box, objectId, commentId) {
@@ -275,19 +294,3 @@ function commentPost(author, objectId, commentId) {
         comment_text.value = "";
     });
 }
-
-// 게시물 클릭시 이벤트 생성
-figure.forEach((el) =>
-    el.addEventListener("click", async (e) => {
-        const objectId = e.target.parentNode.dataset.objectid;
-        const res = await axios.get(
-            `http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/page/detail/${objectId}`
-        );
-        const { author, content, title, thumbnailUrl, metaUrl, likes } =
-            res.data.post;
-        modal(metaUrl, title, content, thumbnailUrl, author, objectId);
-        $("html, body").addClass("not_scroll");
-        preventAction(true);
-        //true : 로그인 false : 로그아웃 !
-    })
-);
