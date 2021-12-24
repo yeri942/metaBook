@@ -157,7 +157,7 @@ function commentRender(objectId) {
                         };
                         console.log(comment_delete_data);
                         axios.delete(
-                            `http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/comment`,
+                            `http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/comment/`,
                             comment_delete_data
                         );
                         // 기존 댓글 삭제 및 다시 불러오기.
