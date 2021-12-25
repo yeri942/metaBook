@@ -131,7 +131,8 @@ function heartPost(objectId, likes, userId) {
         );
         if (res.data.ok) {
             const likeres = await axios.get(`/api/page/detail/${objectId}`);
-            if (likeres.data.post.likes.includes(userId)) {
+            // if (likeres.data.post.likes.includes(userId))
+            if (heart.style.backgroundPosition === "-52px -261px") {
                 heart.style.backgroundPosition = "-26px -261px";
                 like_text.innerText = likeres.data.post.likeCount;
             } else {
