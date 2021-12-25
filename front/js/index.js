@@ -142,7 +142,7 @@ function heartPost(objectId, likes, userId) {
     });
 }
 
-// 좋아요 토글 함수
+// 이전에 좋아요 눌렀던 사람의 경우, 좋아요 상태 유지 함수.
 function heartToggle(likes, userId) {
     let heart_boolean = true;
     const heart = document.querySelector(".sprite_heart_icon_outline");
