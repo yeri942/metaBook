@@ -257,7 +257,7 @@ function modalHtml(metaUrl, title, content, thumbnailUrl, author, likeCount) {
             </div>`;
 }
 
-function commentRender_supporter(objectId) {
+function commentRender_supporter(objectId, userId) {
     axios
         .get(
             `http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/comment/${objectId}`
@@ -266,7 +266,7 @@ function commentRender_supporter(objectId) {
             res.data.forEach((data, idx) => {
                 const { _id } = data;
                 const commentId = _id;
-                $(".comment_box").append(commentHtml(data, commentId));
+                $(".comment_box").append(commentHtml(data, commentId, userId));
                 // const deleteBtn = document.querySelector(".comment_delete");
                 const comment_box = document.querySelector(".comment_box");
                 const deleteBtn =
@@ -292,7 +292,7 @@ function commentRender_supporter(objectId) {
                                         comment_box.firstChild
                                     );
                                 }
-                                commentRender_supporter(objectId);
+                                commentRender_supporter(objectId, userId);
                             });
                     });
             });
@@ -300,7 +300,7 @@ function commentRender_supporter(objectId) {
 }
 
 // 댓글삭제 이벤트 생성 함수
-function commentRender(objectId) {
+function commentRender(objectId, userId) {
     axios
         .get(
             `http://elice-kdt-sw-1st-vm10.koreacentral.cloudapp.azure.com/api/comment/${objectId}`
@@ -309,7 +309,7 @@ function commentRender(objectId) {
             res.data.forEach((data, idx) => {
                 const { _id } = data;
                 const commentId = _id;
-                $(".comment_box").append(commentHtml(data, commentId));
+                $(".comment_box").append(commentHtml(data, commentId, userId));
                 // const deleteBtn = document.querySelector(".comment_delete");
                 const comment_box = document.querySelector(".comment_box");
                 const deleteBtn =
@@ -335,7 +335,7 @@ function commentRender(objectId) {
                                         comment_box.firstChild
                                     );
                                 }
-                                commentRender_supporter(objectId);
+                                commentRender_supporter(objectId, userId);
                             });
                         // 기존 댓글 삭제 및 다시 불러오기.
                     });
@@ -361,7 +361,7 @@ function modal(
     const comment_box = document.querySelector(".comment_box");
     heartToggle(likes, userId);
     closeModal();
-    commentPost(author, objectId);
+    commentPost(author, objectId, userId);
     // commentRendering(comment_box, objectId, commentId);
     commentRender(objectId, userId);
     heartPost(objectId, likes, userId);
@@ -384,7 +384,7 @@ function closeModal() {
 }
 
 // 댓글 쓰기 이벤트 생성
-function commentPost(author, objectId, commentId) {
+function commentPost(author, objectId, userId) {
     const commentUpload = document.querySelector("#commentUpload");
     const comment_text = document.querySelector(".comment_text");
 
@@ -402,7 +402,7 @@ function commentPost(author, objectId, commentId) {
             while (comment_box.hasChildNodes()) {
                 comment_box.removeChild(comment_box.firstChild);
             }
-            commentRender_supporter(objectId);
+            commentRender_supporter(objectId, userId);
         } else {
             swal({
                 title: "다시 입력해주세요.",
